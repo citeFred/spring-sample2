@@ -6,8 +6,8 @@ import hello.core.member.MemberRepository;
 
 public class OrderServiceImpl implements OrderService{
 
-    private final MemberRepository memberRepository; // <- DIP 준수를 위해 추상클래스만 의존
-    private final DiscountPolicy discountPolicy; // <- DIP 준수를 위해 추상클래스만 의존
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
 
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
