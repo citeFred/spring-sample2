@@ -4,6 +4,8 @@ import hello.core.AppConfig;
 import hello.core.member.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,5 +44,24 @@ public class SingletonTest {
         System.out.println("singletonService2 = " + singletonService2);
 
         assertThat(singletonService1).isSameAs(singletonService2);
+    }
+
+    @Test
+    @DisplayName("스프링 컨테이너와 싱글톤")
+    void springContainer() {
+        //given
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        //when
+        //1. 1번 클라이언트의 조회
+        MemberService memberService1 = ac.getBean("memberService", MemberService.class);
+        //2. 2번 클라이언트의 조회
+        MemberService memberService2 = ac.getBean("memberService", MemberService.class);
+
+        //then
+        //ac를 통해 조회한 memberService2개의 주소값 비교
+        System.out.println("memberService1 = " +memberService1); //MemberServiceImpl@3bf7ca37
+        System.out.println("memberService2 = " +memberService2); //MemberServiceImpl@79079097
+        assertThat(memberService1).isSameAs(memberService2);
     }
 }
