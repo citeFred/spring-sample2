@@ -18,18 +18,19 @@ class StatefulServiceTest {
 
         //when
         //ThreadA: A사용자 10000원 주문
-        statefulService1.order("userA", 10000);
+        int userAPrice = statefulService1.order("userA", 10000);
         //ThreadA: B사용자 20000원 주문
-        statefulService2.order("userB", 20000);
+        int userBPrice = statefulService2.order("userB", 20000);
 
-
-        //ThreadA: 사용자A 주문 금액 조회 하는 사이에 위 B사용자가 주문하면서 20000으로 업데이트 되버림.
-        // 같은 객체(service)를 바라보고 있어서 동일한 필드인 price에 할당해버림.
-        int price = statefulService1.getPrice();
-        System.out.println("price = " + price);
+        //int price = statefulService1.getPrice();
+        //System.out.println("price = " + price);
 
         //then
-        assertThat(statefulService1.getPrice()).isEqualTo(20000);
+        //assertThat(statefulService1.getPrice()).isEqualTo(20000);
+        System.out.println("price A = " + userAPrice);
+        System.out.println("price B = " + userBPrice);
+        assertThat(userAPrice).isEqualTo(10000);
+        assertThat(userBPrice).isEqualTo(20000);
     }
 
     static class TestConfig {
