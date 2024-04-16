@@ -21,6 +21,9 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
 
+    //Web 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
     //JSR-330 자바 표준 Provider 사용하기
     implementation 'javax.inject:javax.inject:1'
 
